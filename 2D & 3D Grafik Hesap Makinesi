@@ -104,12 +104,7 @@
             color: white;
             transition: .6s linear; 
             margin-top: 5px;
-        }
-        .equals-button:hover {
-            background-color: magenta;
-            color: black;
             border-radius: 12px;
-            margin-top: 5px;
         }
         #function-input {
             width: 97%; 
@@ -205,45 +200,10 @@
             }
 
             geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-            const material = new THREE.PointsMaterial({ color: 0xff0000 });
+            const material = new THREE.PointsMaterial({ color: 0xff0000, size: 0.1 });
             const points = new THREE.Points(geometry, material);
             scene.add(points);
 
-            // Eksenler için sayılar ekleme
-            const addAxisLabels = (axis, size) => {
-                const divisions = 10;
-                for (let i = -size; i <= size; i += size / divisions) {
-                    const label = document.createElement('div');
-                    label.style.position = 'absolute';
-                    label.style.color = 'black';
-                    label.innerHTML = i.toString();
-                    label.style.transform = `translate(-50%, -50%)`;
-                    if (axis === 'x') {
-                        label.style.left = `${(i + size) * (graphDiv.clientWidth / (2 * size))}px`;
-                        label.style.bottom = '0px';
-                    } else if (axis === 'y') {
-                        label.style.left = '0px';
-                        label.style.bottom = `${(i + size) * (graphDiv.clientHeight / (2 * size))}px`;
-                    } else if (axis === 'z') {
-                        label.style.left = `${(i + size) * (graphDiv.clientWidth / (2 * size))}px`;
-                        label.style.bottom = `${(i + size) * (graphDiv.clientHeight / (2 * size))}px`;
-                    }
-                    graphDiv.appendChild(label);
-                }
-            };
-
-            addAxisLabels('x', 10);
-            addAxisLabels('y', 10);
-            addAxisLabels('z', 10);
-
-            camera.position.z = 50;
-
-            function animate() {
-                requestAnimationFrame(animate);
-                points.rotation.x += 0.01;
-                points.rotation.y += 0.01;
-                renderer.render(scene, camera);
-            }
             // Eksenler için sayılar ekleme
             const addAxisLabels = (axis, size) => {
                 const divisions = 10;
